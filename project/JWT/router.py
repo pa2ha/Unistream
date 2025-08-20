@@ -150,7 +150,7 @@ async def refresh_tokens(request: Request, response: Response, access_token: HTT
         )
 
     await check_access_token(access_token.credentials)
-    
+
     user_info = {
         "username": payload["username"],
         "id": payload["id"]

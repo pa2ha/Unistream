@@ -21,4 +21,3 @@ class Task(Base):
 
     def __repr__(self):
         return f"<Task(title={self.title}, status={self.status}, id={self.id})>"
-    

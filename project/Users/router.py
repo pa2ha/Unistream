@@ -1,12 +1,11 @@
 # users_router.py
-from fastapi import APIRouter, Response, HTTPException, Depends
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from fastapi import APIRouter, Response, HTTPException
+from fastapi.security import HTTPBearer
 from .schemas import UsersAdd, UsersGet
 from .models import Users
 from sqlalchemy import select
 from database import async_session_factory
 import bcrypt
-from JWT.router import check_access_token
 
 
 router = APIRouter()
@@ -49,4 +48,3 @@ async def register_user(user: UsersAdd, response: Response):
     pydant_return = UsersGet.model_validate(new_user, from_attributes=True)
 
     return pydant_return
-
