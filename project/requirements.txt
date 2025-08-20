@@ -1,0 +1,16 @@
+celery==5.4.0
+fastapi==0.115.6
+SQLAlchemy==2.0.36
+pydantic==2.10.4
+uvicorn==0.34.0
+redis==5.2.1
+flower==2.0.1
+pydantic-settings==2.7.0
+alembic==1.14.0
+PyJWT==2.10.1
+bcrypt==4.2.1
+aioredis==2.0.1
+requests==2.32.3
+websockets==14.1
+aiosqlite==0.21.0
+getgauge==0.4.11

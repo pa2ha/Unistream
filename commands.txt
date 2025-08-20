@@ -1,0 +1,14 @@
+Морда доступна на http://127.0.0.1:7100/
+
+name: administrator
+email: administrator@fakedomain.com
+
+
+
+Подключить эмуляторы можно командой:
+
+docker exec adb adb connect host.docker.internal:5555
+
+вместо 5555 указываем порт на котором развернут эмуляторы
+
+И таким образом конектим столько эмуляторов, сколько нам надо
