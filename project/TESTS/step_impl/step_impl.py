@@ -10,7 +10,7 @@ def clear():
     """
     Очищает базу данных.
     """
-    url = f"{BASE_URL}/api/tasksall/"
+    url = f"{BASE_URL}/api/tasks_delete_all"
 
     try:
         response = requests.delete(url, timeout=5)

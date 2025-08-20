@@ -30,14 +30,14 @@ task_router = APIRouter()
 # task_router = APIRouter(dependencies=[Depends(check_token)],)
 
 
-@task_router.get("/", response_model=List[schemas.TaskOut])
+@task_router.get("/", response_model=List[schemas.TaskOut], summary="Получить все задачи")
 async def get_tasks(db: SessionDep):
     result = await db.execute(select(models.Task))
     tasks = result.scalars().all()
     return tasks
 
 
-@task_router.get("/{task_id}", response_model=schemas.TaskOut)
+@task_router.get("/{task_id}", response_model=schemas.TaskOut, summary="Получить конкретную задачу")
 async def get_task(task_id: str, db: SessionDep):
     result = await db.execute(select(models.Task).where(models.Task.uuid == task_id))
     task = result.scalar_one_or_none()
@@ -46,7 +46,7 @@ async def get_task(task_id: str, db: SessionDep):
     return task
 
 
-@task_router.post("/", response_model=schemas.TaskOut)
+@task_router.post("/", response_model=schemas.TaskOut, summary="Создать новуюю задачу")
 async def create_task(task: schemas.TaskCreate, db: SessionDep):
     db_task = models.Task(**task.model_dump())
     db.add(db_task)
@@ -55,7 +55,7 @@ async def create_task(task: schemas.TaskCreate, db: SessionDep):
     return db_task
 
 
-@task_router.put("/{task_id}", response_model=schemas.TaskOut)
+@task_router.put("/{task_id}", response_model=schemas.TaskOut, summary="Изменить конкретную задачу")
 async def update_task(task_id: str, task_update: schemas.TaskUpdate, db: SessionDep):
     result = await db.execute(select(models.Task).where(models.Task.uuid == task_id))
     db_task = result.scalar_one_or_none()
@@ -71,7 +71,7 @@ async def update_task(task_id: str, task_update: schemas.TaskUpdate, db: Session
     return db_task
 
 
-@task_router.delete("/{task_id}")
+@task_router.delete("/{task_id}", summary="Удалить конкретную задачу")
 async def delete_task(task_id: str, db: SessionDep):
     result = await db.execute(select(models.Task).where(models.Task.uuid == task_id))
     db_task = result.scalar_one_or_none()
@@ -83,7 +83,7 @@ async def delete_task(task_id: str, db: SessionDep):
     return {"message": "Task deleted successfully"}
 
 
-@task_router.delete("all", summary="Удалить ВСЕ задачи")
+@task_router.delete("_delete_all", summary="Удалить ВСЕ задачи")
 async def delete_task_all(db: SessionDep):
     result = await db.execute(select(models.Task))
     db_task = result.scalars().all()

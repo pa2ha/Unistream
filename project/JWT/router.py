@@ -16,7 +16,7 @@ from Users.models import Users
 
 router = APIRouter()
 
-redis = from_url(settings.CELERY_BROKER_URL, decode_responses=True)
+redis = from_url(settings.BROKER_URL, decode_responses=True)
 
 SECRET_KEY = settings.SECRET_KEY
 ALGORITHM = settings.ALGORITHM

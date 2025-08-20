@@ -18,17 +18,5 @@ services:
         condition: service_started
     container_name: test_Unistream
 
-  celery:
-    build: ./project
-    command: bash -c "celery --app=celery_app.celery_app worker --loglevel=info  -n worker1@%h & celery --app=celery_app.celery_app worker --loglevel=info -B -n worker5@%h"
-    volumes:
-      - ./project:/usr/src/app
-    env_file:
-      - ./project/.env.dev
-    depends_on:
-      - web
-      - redis
-
-
   redis:
     image: redis:6.2
